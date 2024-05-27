@@ -121,7 +121,7 @@ def trainNetwork(generations: int,
     # explicitly print results if we are verbose
     if verbose:
         print("TRAINING PARAMETERS:")
-        print("Generations: %d" %(generation_size))
+        print("Generations: %d" %(generations))
         print("Children tested per generation: %d" %(generation_size))
         print("Base # of test-games per child: %d" %(base_tests_per_child))
         print("---------------")
