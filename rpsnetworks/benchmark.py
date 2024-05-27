@@ -1,7 +1,7 @@
 # if __name__ == '__main__':
 #     import player_templates
 #     import schema_templates
-#     import training_manager
+#     import legacy_training_manager
 #     import time
 #     import pandas
 #     import multiprocessing
@@ -74,7 +74,7 @@
 if __name__ == '__main__':
     import player_templates
     import schema_templates
-    import tournament_trainer
+    import training_manager
     import time
     import pandas
     import multiprocessing
@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     start_time = time.time()
     with multiprocessing.Pool(10) as pool:
-        results = [pool.apply_async(tournament_trainer.trainNetwork,
+        results = [pool.apply_async(training_manager.trainNetwork,
                                     (generations,
                                     generation_size,
                                     tests_per_child,

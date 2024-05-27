@@ -1,6 +1,6 @@
-from gamestate import *
+from rpsnetworks.gamestate import *
+from rpsnetworks import network
 import random
-import network
 
 class Controller:
     def __init__(self, id: str, controller_callable):

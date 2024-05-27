@@ -1,7 +1,6 @@
 import json
-import player_templates
-import schema_templates
-from gamestate import *
+from rpsnetworks import player_templates, schema_templates
+from rpsnetworks.gamestate import *
 
 def dumpPlayersToJSON(players: list[player_templates.Player]) -> str:
     JSON_compatible_players = []

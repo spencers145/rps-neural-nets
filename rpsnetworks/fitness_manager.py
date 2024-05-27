@@ -1,13 +1,5 @@
-import network
-import battle_manager
-import schema_templates
-import player_templates
+from rpsnetworks import battle_manager, schema_templates
 import json
-
-from importlib import reload
-reload(battle_manager)
-reload(player_templates)
-reload(network)
 
 def getHighestScoringPlayer(generation: list[tuple[int, any]]) -> tuple[int, any]:
     biggest = 0

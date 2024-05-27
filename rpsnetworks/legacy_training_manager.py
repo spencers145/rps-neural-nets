@@ -1,8 +1,4 @@
-import network
-import battle_manager
-import player_templates
-import schema_templates
-import fitness_manager
+from rpsnetworks import network, battle_manager, player_templates, schema_templates, fitness_manager
 import time
 import pandas
 

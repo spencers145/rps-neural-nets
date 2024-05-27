@@ -1,5 +1,4 @@
-from importlib import reload
-from type_templates import *
+from rpsnetworks.type_templates import *
 
 class Schema: 
     def __init__(self, name: str, id: str, types: list[Type]):

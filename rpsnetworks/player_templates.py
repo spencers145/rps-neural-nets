@@ -1,8 +1,4 @@
-from importlib import reload
-import controller_templates
-import network
-
-reload(controller_templates)
+from rpsnetworks import controller_templates, network
 
 class Player:
     def __init__(self, id: str, maximum_hit_points: int, controller: controller_templates.Controller):
