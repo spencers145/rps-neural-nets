@@ -134,4 +134,4 @@ def trainNetwork(generations: int,
         for move in moves.keys():
             print("%s: %.3f" %(move, moves[move]))
 
-    return (score/10000, seed[1], manager.results, moves)
+    return (score/10000, seed[1], manager.history, moves)
