@@ -49,7 +49,7 @@ def trainNetwork(generations: int,
         # if this is the first generation, make 10x more than usual
         for j in range(0, (10*generation_size if i == 1 else generation_size)):
             child_score = 0
-            while child_score == 0:
+            while child_score <= 0:
                 # make a new network based on the seed
                 child_network = network.Network(3, layer_sizes)
                 child_network.setWeights(seed[1].weights)

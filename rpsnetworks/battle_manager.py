@@ -39,7 +39,7 @@ class Game:
 
     def step(self):
         # if the game is over, don't step
-        if self.isGameOver(): return
+        if self.isGameOver(): return True
 
         # advance the gamestate
         self.turn += 1
@@ -118,21 +118,15 @@ class Manager:
         self.games[id] = Game(id, players, schema, options)
 
     def stepAllGamesToCompletion(self):
-        steps = 0
-        while steps < 99 and len(self.games.keys()) > 0:
-            self.stepAllGames()
-            steps += 1
+        for game_id in self.games.keys():
+            self.stepGameToCompletion(game_id)
     
     def stepGameToCompletion(self, game_id):
         steps = 0
         while steps < 99:
             if self.stepGame(game_id): break
+            if steps == 98: self.terminateGame(game_id)
             steps += 1
-
-    def stepAllGames(self):
-        # step all games
-        for game_id in list(self.games.keys()):
-            self.stepGame(game_id)
 
     def stepGame(self, game_id) -> bool:
         game = self.games[game_id]
@@ -144,10 +138,14 @@ class Manager:
         game_over = game.isGameOver()
         if game_over:
             # if so, remove from our list of games and add its results to our list of results
-            self.results[game_id] = game.getCurrentResults()
-            self.history[game_id] = game.getHistory()
-            del self.games[game_id]
+            self.terminateGame(game_id)
         return game_over
+
+    def terminateGame(self, game_id):
+        game = self.games[game_id]
+        self.results[game_id] = game.getCurrentResults()
+        self.history[game_id] = game.getHistory()
+        del self.games[game_id]
     
     def wipeResults(self):
         self.results = {}
