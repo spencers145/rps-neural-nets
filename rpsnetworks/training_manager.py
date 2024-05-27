@@ -8,6 +8,8 @@ def debugNetworkWeightSum(network: network.Network):
                 sum += abs(c)
     return sum
 
+# run a number of games to test the effectiveness of the network we've trained
+# return a score: the number of games won
 def testNetwork(manager: battle_manager.Manager,
              number_of_games: int,
              network: network.Network,
@@ -64,7 +66,7 @@ def trainNetwork(generations: int,
                 # -> aka we make a new one because this one sucks!
                 # we don't want to consider useless candidates, that's wasteful!
                 child_score = testNetwork(manager, 5, child_network, network_player_template, opponents, network_hit_points, schema, {})
-                
+
                 # always allow the seed network through
                 if j == 0: break
             # serviceable networks get added to the generation
