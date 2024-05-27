@@ -8,7 +8,7 @@ def getHighestScoringPlayer(generation: list[tuple[int, any]]) -> tuple[int, any
     return generation.pop(biggest)
 
 # universal fitness function
-def scorePlayer(manager: battle_manager.Manager, player_id: str):
+def scorePlayer(manager: battle_manager.Manager, player_id: str) -> int:
     score = 0
     for game_id in manager.results.keys():
         # only judge the model if it survives the game (0 points for losing)
@@ -20,7 +20,7 @@ def scorePlayer(manager: battle_manager.Manager, player_id: str):
     return score
 
 # count up the moves made by the model
-def countMoves(manager: battle_manager.Manager, player_id: str, schema: schema_templates.Schema):
+def countMoves(manager: battle_manager.Manager, player_id: str, schema: schema_templates.Schema) -> dict:
     moves = {}
     total_player_moves = 0
     for type in schema.TYPES.keys():

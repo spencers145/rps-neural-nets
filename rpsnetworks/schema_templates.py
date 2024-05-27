@@ -21,7 +21,7 @@ class Schema:
                 # ensure the two compared types have a defined interaction
                 assert comparison_type_id in interaction_keys, "Invalid schema. %s (offensive) interaction with %s (defensive) is not defined." %(comparison_type_id, type.id)
 
-    def generateTypeKey(self, types):
+    def generateTypeKey(self, types) -> dict:
         key = {}
         for type in types:
             key[type.ID] = type
