@@ -89,6 +89,15 @@ def trainNetwork(generations: int,
                 step_generation.append((child_score + child[0], child[1]))
             generation = []
 
+            # debug code that activates if verbose is on
+            # tells about the scores of contestants in the training process for each round
+            if debug and verbose:
+                debug_scores = []
+                for child in step_generation:
+                    debug_scores.append(child[0])
+                debug_scores.sort(reverse=True)
+                print(debug_scores)
+
             # pop off the best math.ceil(len(generation)/(2*step)) players
             while len(generation) < target_survivor_count:
                 best = fitness_manager.getHighestScoringPlayer(step_generation)
