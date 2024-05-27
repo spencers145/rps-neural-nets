@@ -30,7 +30,7 @@ class Schema:
     def getHealthChange(self, attacking_type, defending_type):
         return self.TYPES[defending_type].INTERACTIONS[attacking_type]
 
-class rockPaperScissors(Schema):
+class RockPaperScissors(Schema):
     def __init__(self):
         super().__init__("Rock Paper Scissors", "rps", [Rock(), Paper(), Scissors()])
 
