@@ -37,6 +37,7 @@ def trainNetwork(generations: int,
                     opponents: list[player_templates.Player],
                     network_hit_points: int,
                     schema: schema_templates.Schema,
+                    verbose = False,
                     debug = False) -> tuple[float, network.Network, dict, dict]:
     manager = battle_manager.Manager()
     # set our seed
@@ -105,5 +106,21 @@ def trainNetwork(generations: int,
     # get a final result to test the effectiveness of the model
     score = testNetwork(manager, 10000, seed[1], network_player_template, opponents, network_hit_points, schema, {"record_players": True})
     moves = fitness_manager.countMoves(manager, "test_network", schema)
+
+    # explicitly print results if we are verbose
+    if verbose:
+        print("TRAINING PARAMETERS:")
+        print("Generations: %d" %(generation_size))
+        print("Children tested per generation: %d" %(generation_size))
+        print("Base # of test-games per child: %d" %(base_tests_per_child))
+        print("---------------")
+        print("Schema used: %s" %(schema.NAME))
+        print("Opponent count: %d" %(len(opponents)))
+        print("---------------")
+        print("RESULTS:")
+        print("Network proficiency: %.3f" %(score/10000))
+        print("Move distribution:")
+        for move in moves.keys():
+            print("%s: %.3f" %(move, moves[move]))
 
     return (score/10000, seed[1], manager.results, moves)
