@@ -28,6 +28,65 @@ class mixedStrategyController(Controller):
         moves = list(gamestate.ALLOWED_MOVES.keys())
         return random.choices(moves, self.strategy)[0]
 
+# designed for RPG Fascimile
+class customStrategy1Controller(Controller):
+    def __init__(self, player_id: str, id: str, strategy: list[float]):
+        self.strategy = strategy
+        self.PLAYER_ID = player_id
+        super().__init__(id, self.pickWeightedRandomMove)
+    
+    def pickWeightedRandomMove(self, gamestate: GameState):
+        strategy_this_turn = self.strategy.copy()
+        # find myself
+        for player in gamestate.PLAYERS:
+            if player.ID == self.PLAYER_ID:
+                myself = player
+                break
+        
+        # strategic AI
+        another_same = False
+        another_at_1 = False
+        another_at_2 = False
+        for player in gamestate.PLAYERS:
+            if player.ID != self.PLAYER_ID:
+                another_same = another_same or player.hit_points == myself.hit_points
+                another_at_1 = another_at_1 or player.hit_points == 1
+                another_at_2 = another_at_2 or player.hit_points == 2
+        
+        if another_at_1:
+            # kill!!!
+            strategy_this_turn[0] *= 4
+        
+        if another_at_2:
+            # win in sight
+            strategy_this_turn[0] *= 2
+            strategy_this_turn[2] *= 2
+
+        if myself.hit_points == 1:
+            # defending isn't going to help
+            strategy_this_turn[1] *= 0
+            if not another_at_1:
+                # attacking doesn't win
+                strategy_this_turn[0] *= 0
+            if not another_at_2:
+                # specialing doesn't win
+                strategy_this_turn[2] *= 0
+        elif myself.hit_points == 2:
+            # let's not get specialed
+            strategy_this_turn[3] *= 3
+            strategy_this_turn[4] *= 4
+        else:
+            # offensive plays are good
+            strategy_this_turn[0] *= 3
+            strategy_this_turn[2] *= 2
+            if another_same:
+                # don't let them take the health advantage
+                strategy_this_turn[4] *= 3
+            
+        moves = list(gamestate.ALLOWED_MOVES.keys())
+        return random.choices(moves, strategy_this_turn)[0]
+
+
 class basicNeuralNetworkController(Controller):
     def __init__(self, id: str, network: network.Network):
         self.network = network
