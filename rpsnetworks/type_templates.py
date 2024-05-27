@@ -1,8 +1,8 @@
 class Type:
     def __init__(self, name: str, id: str, interactions: dict):
-        self.name = name
-        self.id = id
-        self.interactions = interactions
+        self.NAME = name
+        self.ID = id
+        self.INTERACTIONS = interactions
 
 class Rock(Type):
     def __init__(self):

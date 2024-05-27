@@ -2,20 +2,20 @@ from rpsnetworks import controller_templates, network
 
 class Player:
     def __init__(self, id: str, maximum_hit_points: int, controller: controller_templates.Controller):
-        self.id = id
-        self.maximum_hit_points = maximum_hit_points
-        self.controller = controller
+        self.ID = id
+        self.MAXIMUM_HIT_POINTS = maximum_hit_points
+        self.CONTROLLER = controller
         self.resetHealth()
 
     def getMove(self, gamestate) -> str:
-        return self.controller.getMove(gamestate)
+        return self.CONTROLLER.getMove(gamestate)
 
     def changeHealth(self, amount):
         self.hit_points += amount
         if self.hit_points < 0: self.hit_points = 0
     
     def resetHealth(self):
-        self.hit_points = self.maximum_hit_points
+        self.hit_points = self.MAXIMUM_HIT_POINTS
 
 class randomPlayer(Player):
     def __init__(self, id: str, maximum_hit_points: int):

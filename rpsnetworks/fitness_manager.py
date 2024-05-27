@@ -23,7 +23,7 @@ def scorePlayer(manager: battle_manager.Manager, player_id: str):
 def countMoves(manager: battle_manager.Manager, player_id: str, schema: schema_templates.Schema):
     moves = {}
     total_player_moves = 0
-    for type in schema.types.keys():
+    for type in schema.TYPES.keys():
         moves[type] = 0
     for game_n in manager.history:
         for turn_n in range(0, len(manager.history[game_n])):
