@@ -82,14 +82,14 @@ class Game:
                 self.players.pop(i)
 
     def updateHistory(self, players_before_turn, players_after_turn, moves, turn):
-        gamestate = {
+        this_turn = {
             "players_before_turn": players_before_turn,
             "players_after_turn": dumpPlayersToJSON(players_after_turn),
             "moves": moves,
             "turn": turn
         }
 
-        self.history.append(gamestate)
+        self.history.append(this_turn)
 
     def isGameOver(self) -> bool:
         alive_players = 0
