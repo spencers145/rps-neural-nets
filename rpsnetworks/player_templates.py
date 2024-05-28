@@ -23,7 +23,7 @@ class randomPlayer(Player):
     
 class mixedStrategyPlayer(Player):
     def __init__(self, id: str, maximum_hit_points: int, strategy: list[float]):
-        super().__init__(id, maximum_hit_points, controller_templates.mixedStrategyController("random", strategy))
+        super().__init__(id, maximum_hit_points, controller_templates.mixedStrategyController("mixed_random", strategy))
 
 class basicNetworkPlayer(Player):
     def __init__(self, id: str, maximum_hit_points: int, controller_id: str, network: network.Network):
