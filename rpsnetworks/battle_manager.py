@@ -37,7 +37,7 @@ class Game:
         for player in self.players:
             assert player.hit_points > 0, "%s has 0 hit points." %(player.id)
 
-    def step(self):
+    def step(self) -> bool:
         # if the game is over, don't step
         if self.isGameOver(): return True
 
@@ -73,6 +73,7 @@ class Game:
         # update history
         if self.RECORD_PLAYERS: self.updateHistory(players_before_turn, self.players, moves, self.turn)
         else: self.updateHistory("", "", moves, self.turn)
+        return False
 
     def purgeDefeatedPlayers(self):
         # iterate backwards through players
