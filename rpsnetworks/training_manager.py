@@ -39,11 +39,12 @@ def trainNetwork(generations: int,
                     network_hit_points: int,
                     opponents: list[player_templates.Player],
                     schema: schema_templates.Schema,
+                    network_activation_type = "linear",
                     verbose = False,
                     debug = False) -> tuple[float, network.Network, dict, dict]:
     manager = battle_manager.Manager()
     # set our seed
-    seed = (0, network.Network(len(layer_sizes), layer_sizes))
+    seed = (0, network.Network(layer_sizes, network_activation_type))
 
     for i in range(1, generations + 1):
         generation = []
@@ -53,7 +54,7 @@ def trainNetwork(generations: int,
             child_score = 0
             while child_score <= 0:
                 # make a new network based on the seed
-                child_network = network.Network(3, layer_sizes)
+                child_network = network.Network(layer_sizes, network_activation_type)
                 child_network.setWeights(seed[1].weights)
                 # jostle amount as a function of how many generations (i) and which child (j)
                 # effectively, i increase precision over time
